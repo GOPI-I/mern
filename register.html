@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        flex-direction: column;
+      }
+
+      .menu {
+        list-style-type: none;
+        padding: 15px 0;
+        margin: 0;
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-bottom: 2px solid #eee;
+      }
+
+      .menu li {
+        display: inline;
+      }
+
+      .menu a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 10px 20px;
+        display: block;
+        transition: color 0.3s, background-color 0.3s, border-radius 0.3s;
+      }
+
+      .menu a.active {
+        color: #007bff;
+        background-color: #e9f2ff;
+        border-radius: 5px;
+      }
+
+      .menu a:hover {
+        color: #007bff;
+        background-color: #f0f8ff;
+        border-radius: 5px;
+      }
+
+      .login-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 300px;
+        text-align: center;
+      }
+
+      .login-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .login-container div {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      .login-container label {
+        font-size: 14px;
+        color: #555;
+      }
+
+      .login-container input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .login-container input:hover {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .login-container button:hover {
+        background-color: #45a049;
+      }
+
+      .login-container a {
+        display: block;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .login-container a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="menu">
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="home.html">Home</a></li>
+      <li><a class="active" href="login.html">Login</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="login-container">
+      <h2>LOGIN</h2>
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" id="uname" />
+      </div>
+      <div>
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" />
+      </div>
+      <button type="button" onclick="fetchLogin()">Login</button>
+      <a href="/register.html">Don't have an Account? Register</a>
+    </div>
+    <script>
+      async function fetchLogin() {
+        let data = {
+          email: document.getElementById("uname").value,
+          password: document.getElementById("pass").value,
+        };
+        if (!data["email"] && !data["password"]) {
+          alert("Enter Username and Password");
+          return;
+        }
+        let res = await fetch("https://reqres.in/api/login", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { "content-type": "application/json" },
+        });
+        let json = await res.json();
+        console.log(json["token"]);
+        if (json["token"]) {
+          alert("Login successful!");
+        }
+      }
+    </script>
+  </body>
+</html>
