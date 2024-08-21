@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <style>
+        form{
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 55px;
+            
+        }
+        input{
+            border-radius: 50px;
+        }
+        input:hover{
+            border-color: rebeccapurple;
+            border-width: 10px;
+        }
+        button{
+            background-color:brown;
+            color: antiquewhite;
+            width:60px;
+
+        }
+        button:hover{
+            background-color: cadetblue;
+        }
+        label{
+            font-size:17px;
+            font-weight: bolder;
+            font-family: serif;
+            font-style: oblique;
+        }
+        label:hover{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="arrayForm">
+        <label for="input">Enter a value:</label>
+        <input type="text" id="input" name="input" placeholder="enter value to add ">
+        <button type="button" onclick="addToArray()">Add</button>
+    </form>
+
+    <script>
+        let valuesArray = [];
+
+        function addToArray() {
+            let inputValue = document.getElementById('input').value;
+            valuesArray.push(inputValue);
+            console.log(valuesArray);
+            document.getElementById('input').value = '';
+        }
+    </script>
+</body>
+</html>
